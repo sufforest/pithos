@@ -1,0 +1,8 @@
+go 1.24.6
+
+use (
+	./examples/go/proto-demo
+	./examples/go/starter
+	./gen/go
+	./libs/go/timeutils
+)

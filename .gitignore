@@ -1,0 +1,47 @@
+# Mac
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.env
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# C++ / CMake
+build/
+cmake-build-debug/
+cmake-build-release/
+compile_commands.json
+.cache/
+
+# Rust
+target/
+**/*.rs.bk
+
+# Go
+bin/
+
+# Pithos Specific
+gen/
+scratch/*
+!scratch/.gitkeep
+
+# Misc
+go.work.sum
+release/
+dist/
+coverage/
+.coverage
+test-results/
