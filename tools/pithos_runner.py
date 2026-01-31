@@ -59,7 +59,7 @@ class CppHandler(Handler):
         build_dir = path / "build"
         build_dir.mkdir(exist_ok=True)
         
-        cmake_cmd = ["cmake", "-S", ".", "-B", "build"]
+        cmake_cmd = ["cmake", "-S", ".", "-B", "build", "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"]
         
         # Explicitly set Sysroot on macOS to avoid "file not found" errors
         if sys.platform == "darwin":
@@ -70,6 +70,18 @@ class CppHandler(Handler):
                 pass
 
         run_cmd(cmake_cmd, cwd=path)
+
+        # Symlink compile_commands.json to root for LSP support
+        compile_commands = path / "build" / "compile_commands.json"
+        target_link = path / "compile_commands.json"
+        if compile_commands.exists():
+            if target_link.exists() or target_link.is_symlink():
+                target_link.unlink()
+            try:
+                target_link.symlink_to(compile_commands)
+                print(f"Symlinked {compile_commands} -> {target_link}")
+            except OSError as e:
+                print(f"Warning: Failed to symlink compile_commands.json: {e}")
         run_cmd(["cmake", "--build", "build"], cwd=path)
     def test(self, path):
         check_tool("ctest", "brew install cmake")
