@@ -108,7 +108,13 @@ clean:
     rm -rf libs/*/*/__pycache__
     rm -rf .venv
     rm -rf projects/*/.venv
+    rm -rf projects/*/.venv
     @echo "Cleaned all build artifacts and environments."
+
+# Generate global compilation database for IDE support
+setup-dev:
+    ./tools/gen_compile_db.py
+    @echo "Global compile_commands.json generated."
 
 
 
