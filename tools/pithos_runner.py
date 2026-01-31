@@ -276,11 +276,12 @@ def main():
     cwd = Path.cwd()
     target_path = cwd / args.target
     
-    # Search order: root -> projects -> examples -> scripts
+    # Search order: projects -> examples -> root -> scripts
+    # We check projects first to avoid shadowing (e.g., project "tools" vs root "tools/" dir)
     search_paths = [
-        cwd / args.target,
         cwd / "projects" / args.target,
         cwd / "examples" / args.target,
+        cwd / args.target,
         cwd / "scripts" / args.target,
         cwd / "scripts" / (args.target + ".py")
     ]
