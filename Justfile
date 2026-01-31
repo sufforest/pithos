@@ -111,3 +111,29 @@ clean:
     @echo "Cleaned all build artifacts and environments."
 
 
+
+# Sync with upstream template
+# Usage: just sync-template [url]
+sync-template url="https://github.com/sufforest/pithos.git":
+    #!/usr/bin/env bash
+    # 1. Ensure this is a git repo (handles ZIP downloads)
+    if [ ! -d .git ]; then
+        echo "Initializing git repository..."
+        git init
+        git add .
+        git commit -m "Initial state from Pithos template"
+        echo "WARNING: You started from a ZIP. Future updates might have merge conflicts (Add/Add)."
+    fi
+
+    # 2. Ensure upstream remote exists
+    if ! git remote get-url upstream &>/dev/null; then
+        echo "Remote 'upstream' not found. Adding it..."
+        echo "URL: {{url}}"
+        git remote add upstream {{url}}
+    fi
+
+    echo "Fetching updates from upstream..."
+    git fetch upstream
+    echo "Merging updates..."
+    # --no-edit accepts the auto-generated merge message
+    git merge upstream/main --allow-unrelated-histories --no-edit

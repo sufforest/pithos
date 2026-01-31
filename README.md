@@ -71,9 +71,19 @@ Check `examples/` for full examples that use **Protobuf** and **Shared Libraries
 | **Go** | `examples/go/proto-demo` |
 | **Python** | `examples/python/proto-demo` |
 
-Run them (autocomplete works!):
 ```bash
 just run cpp/proto-demo
 just run go/proto-demo
 just run python/proto-demo
 ```
+
+## Maintenance
+
+### Keeping Updated
+You can pull new features/fixes from the upstream template at any time.
+
+```bash
+just sync-template
+```
+*Auto-fetches from remote `upstream` and merges updates.*
+*Note: For smooth updates, you should **Start with a Git Clone**. Updating from a ZIP download works but may cause "Add/Add" conflicts because history is missing.*
