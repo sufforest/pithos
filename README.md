@@ -18,10 +18,7 @@
 You need **Just** and the languages you plan to use.
 
 ```bash
-# 1. Install the runner (Optional - setup.sh installs a local version)
-# brew install just
-
-# 2. Run the setup script (Installs local Just, Python, Go via mise)
+# 1. Run the setup script (Installs local Just, Python, Go via mise)
 ./setup.sh
 
 # 3. Activates environment
